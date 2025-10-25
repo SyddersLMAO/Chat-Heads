@@ -1,6 +1,10 @@
 package com.sydders.chatHeads;
 
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.object.ObjectContents;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.chat.ComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -17,7 +21,6 @@ public class ChatListener implements Listener {
 
     private final ChatHeads plugin;
 
-
     public ChatListener(ChatHeads plugin) {
         this.plugin = plugin;
     }
@@ -29,9 +32,14 @@ public class ChatListener implements Listener {
 
         event.setCancelled(true);
 
-        Bukkit.getScheduler().runTask(this.plugin, () -> {
-            String cmd = "tellraw @a [{\"player\":\"" + p.getName() + "\"}, \" <" + p.getName() + "> " + msg + "\"]";
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
+        final Component component = MiniMessage.miniMessage().deserialize(
+                "<head:" + p.getUniqueId() + ":true> <" + p.getName() + "> " + msg
+        );
+
+        Bukkit.getScheduler().runTask(plugin, () -> {
+            for (Player viewer : Bukkit.getOnlinePlayers()) {
+                viewer.sendMessage(component);
+            }
         });
     }
 

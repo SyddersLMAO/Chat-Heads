@@ -1,5 +1,5 @@
 name: ChatHeads
-version: '1.0.0'
+version: '1.0.1'
 main: com.sydders.chatHeads.ChatHeads
 api-version: '1.21'
 description: Add player heads before a player's chat message
