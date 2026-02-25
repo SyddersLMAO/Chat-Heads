@@ -17,7 +17,13 @@ public class ChatListener implements Listener {
 
         event.renderer((source, sourceDisplayName, message, viewer) -> {
             Component original = existingRenderer.render(source, sourceDisplayName, message, viewer);
-            Component head = MiniMessage.miniMessage().deserialize("<head:" + source.getUniqueId() + ":true> ");
+            Component head;
+
+            try {
+                head = MiniMessage.miniMessage().deserialize("<head:" + source.getUniqueId() + ":true> ");
+            } catch (Exception e) {
+                head = MiniMessage.miniMessage().deserialize("<head:8667ba71-b85a-4004-af54-457a9734eed7:true> ");
+            }
 
             return head.append(original);
         });

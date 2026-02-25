@@ -1,2 +1,2 @@
 com\sydders\chatHeads\ChatHeads.class
-com\sydders\chatHeads\ChatListener.class
+com\sydders\chatHeads\listener\ChatListener.class
