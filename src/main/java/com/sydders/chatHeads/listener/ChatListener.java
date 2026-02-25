@@ -11,7 +11,7 @@ import io.papermc.paper.event.player.AsyncChatEvent;
 
 public class ChatListener implements Listener {
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onAsyncChat(AsyncChatEvent event) {
         ChatRenderer existingRenderer = event.renderer();
 
